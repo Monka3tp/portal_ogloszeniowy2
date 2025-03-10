@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+  background-color: purple !important;
+  border-color: purple !important;
+}
+.btn-primary:hover{
+  background-color: #af01af !important;
+  border-color: #af01af !important;
+}
+
+.ogloszenie-input {
+  width: 300px !important;
+}

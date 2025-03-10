@@ -15,7 +15,7 @@ function Header() {
         zIndex: "1000",
       }}
     >
-      <nav style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <nav style={{ maxWidth: "100%", margin: "0 auto"}}>
         <ul
           style={{
             listStyleType: "none",

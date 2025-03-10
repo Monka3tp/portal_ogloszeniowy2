@@ -1,16 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
+import { createId } from '@paralleldrive/cuid2';
+import "bootstrap/dist/css/bootstrap.css"
+
+var ogloszenia = [
+  {
+    id: createId(),
+    title: "KK",
+    desc: "Sprzedam skode octavie, nienawidze tego syfu doplace za wziecie tego ode mnie"
+  }
+]
+
+
+
+export function addAnnouncment(title, desc) {
+  ogloszenia.push({
+    id: createId(),
+    title: title,
+    desc: desc
+  })
+}
 
 function Announcement() {
+
   return (
     <div style={containerStyle}>
       <h2 style={titleStyle}>Ogłoszenia</h2>
       <div style={flexContainer}>
-        {/* Przykładowe ogłoszenia */}
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index} className="card" style={cardStyle}>
+        {ogloszenia.map((ogloszenie) => (
+          <div key={ogloszenie.id} className="card" style={cardStyle}>
             <div className="card-body">
-              <h5 className="card-title">Ogłoszenie {index + 1}</h5>
-              <p className="card-text">Opis ogłoszenia...</p>
+              <h5 className="card-title">{ogloszenie.title}</h5>
+              <p className="card-text">{ogloszenie.desc}</p>
               <a href="#" className="btn btn-primary">
                 Zobacz więcej
               </a>
@@ -33,7 +53,7 @@ const containerStyle = {
 const titleStyle = {
   textAlign: "center",
   marginBottom: "20px",
-  color: "white",
+  color: "black",
   fontSize: "24px",
 };
 

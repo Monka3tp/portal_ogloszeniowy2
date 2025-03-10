@@ -9,11 +9,12 @@ import {
 import Header from "./Header";
 import Announcement from "./Ogloszenia";
 import AddAnnouncement from "./DodajOgloszenie";
+import "bootstrap/dist/css/bootstrap.css"
 
-// Strona główna
+
 const HomePage = () => <h2>Strona Główna</h2>;
 
-// Tworzymy główną trasę (root)
+
 const rootRoute = createRootRouteWithContext()({
   component: () => (
     <>
@@ -25,7 +26,7 @@ const rootRoute = createRootRouteWithContext()({
   ),
 });
 
-// Definiujemy podstrony
+
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
@@ -44,12 +45,11 @@ const createPostRoute = createRoute({
   component: AddAnnouncement,
 });
 
-// Tworzymy router
+
 const router = createRouter({
   routeTree: rootRoute.addChildren([homeRoute, postsRoute, createPostRoute]),
 });
 
-// Renderujemy aplikację
 function App() {
   return <RouterProvider router={router} />;
 }
