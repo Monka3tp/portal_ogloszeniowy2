@@ -11,20 +11,33 @@ function AddAnnouncement() {
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [alertHidden, setAlertHidden] = useState(true);
+  const [toNegotiation, setToNegotiation] = useState(false);
+  const [free, setFree] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (image) {
-      const imageUrl = URL.createObjectURL(image);
-      addAnnouncment(title, description, price, imageUrl);
-    } else {
-      addAnnouncment(title, description, "");
-    }
-    setTitle("");
-    setDescription("");
-    setImage("");
-    setPrice("");
-    setAlertHidden(false);
+    fetch(`http://localhost:3000/ogloszenia`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        desc: description,
+        price: free ? 0 : price,
+        photo: image ? URL.createObjectURL(image) : "",
+        to_negotiation: toNegotiation,
+        free: free,
+      })
+    })
+        .then(() => {
+          setTitle("");
+          setDescription("");
+          setImage("");
+          setPrice("");
+          setToNegotiation(false);
+          setFree(false);
+          setAlertHidden(false)
+          })
+        .catch(err => console.error(err));
   };
 
   const handleImageChange = (e) => {
@@ -82,7 +95,7 @@ function AddAnnouncement() {
               style={{display: "block", padding: "8px"}}
           />
         </div>
-        <div style={{marginBottom: "10px"}}>
+        <div style={{marginBottom: "10px", display: "flex"}}>
           <label htmlFor="price-input">Cena:</label>
           <input
               id="price-input"
@@ -90,8 +103,29 @@ function AddAnnouncement() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
+              disabled={(free) ? "disabled" : ""}
               style={{display: "block", padding: "8px"}}
           ></input>
+              <input
+                  id="free-input"
+                  className="ogloszenie-input"
+                  type="checkbox"
+                  checked={free}
+                  onChange={(e) => setFree(e.target.checked)}
+                  style={{display: "block", padding: "8px"}}
+              ></input>
+              <label htmlFor="free-input">Za darmo</label>
+        </div>
+        <div style={{marginBottom: "10px", display: "flex"}}>
+          <input
+              id="negotiation-input"
+              className="ogloszenie-input"
+              type="checkbox"
+              checked={toNegotiation}
+              onChange={(e) => setToNegotiation(e.target.checked)}
+              style={{display: "block", padding: "8px"}}
+          ></input>
+          <label htmlFor="negotiation-input">Do negocjacji</label>
         </div>
         <button type="submit" className="btn btn-primary">
           Dodaj

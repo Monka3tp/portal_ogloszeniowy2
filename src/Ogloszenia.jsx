@@ -68,18 +68,20 @@ export function addAnnouncment(title, desc, price, photo) {
     desc: desc,
     price: price,
     photo: photo,
+
   });
 }
 
 function Announcement() {
   const [observedAnnouncements, setObservedAnnouncements] = useState({});
+  const [ogloszenia, setOgloszenia] = useState([]);
 
 
   useEffect(() => {
-    const savedObserved = JSON.parse(localStorage.getItem("observedAnnouncements"));
-    if (savedObserved) {
-      setObservedAnnouncements(savedObserved);
-    }
+    fetch(`http://localhost:3000/ogloszenia`)
+        .then(response => response.json())
+        .then(data => setOgloszenia(data))
+        .catch(err => console.error(err));
   }, []);
 
   const handleObserve = (id) => {
@@ -123,7 +125,7 @@ function Announcement() {
                   >
                     {isObserved ? "Obserwujesz" : "Obserwuj"}
                   </button>
-                  <div className="card-footer">{ogloszenie.price}</div>
+                  <div className="card-footer">{ogloszenie.free ? "Za Darmo" : ogloszenie.price}{ogloszenie.to_negotiation ? " | Do Negocjacji" : ""}</div>
                 </div>
             );
           })}
