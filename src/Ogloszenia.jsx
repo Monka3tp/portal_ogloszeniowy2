@@ -2,64 +2,8 @@ import React, { useState, useEffect } from "react";
 import { createId } from '@paralleldrive/cuid2';
 import "bootstrap/dist/css/bootstrap.css";
 
-var ogloszenia = [
-  {
-    id: createId(),
-    title: "Sprzedam rower",
-    desc: "Sprzedam używany rower górski, stan dobry, mało używany. Cena do negocjacji.",
-    price: "do negocjacji",
-    photo: "https://www.tabou.pl/wp-content/uploads/2023/05/Rower-elektryczny-TABOU-KINETIC-UP-1.0-W-2023_43246.jpg"
-  },
-  {
-    id: createId(),
-    title: "Wynajmę mieszkanie",
-    desc: "Wynajmę kawalerkę w centrum miasta. Mieszkanie umeblowane, idealne dla singla lub pary.",
-    price: "1000 zł/miesiąc",
-    photo: "https://i.st-nieruchomosci-online.pl/gdtf4px/mieszkanie-poznan-wynajem.jpg"
-  },
-  {
-    id: createId(),
-    title: "Zatrudnię programistę",
-    desc: "Szukamy programisty JavaScript do pracy zdalnej. Wymagana dobra znajomość React i Node.js.",
-    price: "do uzgodnienia",
-    photo: "https://psr.gda.pl/wp-content/uploads/2020/06/programmer-scaled.jpg"
-  },
-  {
-    id: createId(),
-    title: "Kupię telefon",
-    desc: "Kupię używany telefon, najlepiej iPhone 12 lub nowszy, stan dobry, cena do uzgodnienia.",
-    price: "do uzgodnienia",
-    photo: "https://th.bing.com/th/id/OIP.3Vi0XbNqFIY9f-FiYP8kzgHaHa?rs=1&pid=ImgDetMain"
-  },
-  {
-    id: createId(),
-    title: "Sprzedam książki",
-    desc: "Sprzedam książki do nauki języka angielskiego. Stan bardzo dobry, ceny przystępne.",
-    price: "10-30 zł",
-    photo: "https://sklep.magnapolonia.org/wp-content/uploads/2022/11/dcb52ce41128c7-atlas-grzybow-400x576.jpeg"
-  },
-  {
-    id: createId(),
-    title: "Oddam za darmo",
-    desc: "Oddam za darmo stare meble: stół, krzesła i szafa. Do odbioru w Warszawie.",
-    price: "0 zł",
-    photo: "https://th.bing.com/th/id/OIP.WOZw0hxfNUPe6n4b2BsNBwHaFj?rs=1&pid=ImgDetMain"
-  },
-  {
-    id: createId(),
-    title: "Naprawa komputerów",
-    desc: "Naprawiam komputery stacjonarne i laptopy. Szybka naprawa, przystępne ceny.",
-    price: "od 50 zł",
-    photo: "https://d-gr.cdngr.pl/kadry/k/r/gr-ogl/30/1b/28404397_769952175_komputer-stacjonarny-z-monitorem-i-wifi-do-szkoly_xlarge.jpg"
-  },
-  {
-    id: createId(),
-    title: "Sprzedam grilla",
-    desc: "Sprzedam grill węglowy, prawie nieużywany. Idealny na letnie spotkania. Cena 150 zł.",
-    price: "150 zł",
-    photo: "https://th.bing.com/th/id/OIP.vYUpm5Me_4c8EQBjamjCogHaFj?rs=1&pid=ImgDetMain"
-  }
-];
+
+var ogloszenia = [];
 
 export function addAnnouncment(title, desc, price, photo) {
   ogloszenia.push({
@@ -72,9 +16,9 @@ export function addAnnouncment(title, desc, price, photo) {
   });
 }
 
-function Announcement() {
-  const [observedAnnouncements, setObservedAnnouncements] = useState({});
+export function Announcement() {
   const [ogloszenia, setOgloszenia] = useState([]);
+  const [observedAnnouncements, setObservedAnnouncements] = useState({});
 
 
   useEffect(() => {
