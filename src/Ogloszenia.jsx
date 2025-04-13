@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createId } from '@paralleldrive/cuid2';
 import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "@tanstack/react-router";
 
 
 var ogloszenia = [];
@@ -48,13 +49,13 @@ export function Announcement() {
 
             return (
                 <div key={ogloszenie.id} className="card" style={cardStyle}>
-                  <img src={ogloszenie.photo} className="card-img-top" alt={ogloszenie.title} />
+                  <img src={ogloszenie.photos[0]} className="card-img-top" alt={ogloszenie.title} />
                   <div className="card-body">
                     <h5 className="card-title">{ogloszenie.title}</h5>
                     <p className="card-text">{ogloszenie.desc}</p>
-                    <a href="#" className="btn btn-primary">
+                    <Link to={`/posts/${ogloszenie.id}`} className="btn btn-primary">
                       Zobacz więcej
-                    </a>
+                    </Link>
                   </div>
                   <button
                       onClick={() => handleObserve(ogloszenie.id)}

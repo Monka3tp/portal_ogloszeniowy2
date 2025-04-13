@@ -4,11 +4,12 @@ import {
   createRootRouteWithContext,
   createRoute,
   createRouter,
-  Outlet, 
+  Outlet,
 } from "@tanstack/react-router";
 import Header from "./Header";
 import Announcement from "./Ogloszenia";
 import AddAnnouncement from "./DodajOgloszenie";
+import DetailedAnnouncement from "./DetOgloszenie";
 import "bootstrap/dist/css/bootstrap.css"
 
 
@@ -45,10 +46,18 @@ const createPostRoute = createRoute({
   component: AddAnnouncement,
 });
 
+const postDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'posts/$id',
+  component: DetailedAnnouncement,
+  notFoundComponent: () => <div>Nie znaleziono ogłoszenia</div>
+});
 
 const router = createRouter({
-  routeTree: rootRoute.addChildren([homeRoute, postsRoute, createPostRoute]),
+  routeTree: rootRoute.addChildren([homeRoute, postsRoute, createPostRoute, postDetailRoute]),
+  defaultNotFoundComponent: () => <div>Nie znaleziono strony</div>,
 });
+
 
 function App() {
   return <RouterProvider router={router} />;
