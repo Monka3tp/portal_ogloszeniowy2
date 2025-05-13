@@ -1,168 +1,164 @@
-import React, { useState, useEffect } from "react";
-import { createId } from '@paralleldrive/cuid2';
+import {useState, useEffect} from "react";
+import {Link, useNavigate} from "@tanstack/react-router";
+import {followAnnouncement, getFollowedAnnouncements} from "./firebaseUtils.js";
+import {useUser} from "./UserContext.jsx";
+
+import ClipLoader from "react-spinners/ClipLoader";
 import "bootstrap/dist/css/bootstrap.css";
-
-var ogloszenia = [
-  {
-    id: createId(),
-    title: "Sprzedam rower",
-    desc: "Sprzedam używany rower górski, stan dobry, mało używany. Cena do negocjacji.",
-    price: "do negocjacji",
-    photo: "https://www.tabou.pl/wp-content/uploads/2023/05/Rower-elektryczny-TABOU-KINETIC-UP-1.0-W-2023_43246.jpg"
-  },
-  {
-    id: createId(),
-    title: "Wynajmę mieszkanie",
-    desc: "Wynajmę kawalerkę w centrum miasta. Mieszkanie umeblowane, idealne dla singla lub pary.",
-    price: "1000 zł/miesiąc",
-    photo: "https://i.st-nieruchomosci-online.pl/gdtf4px/mieszkanie-poznan-wynajem.jpg"
-  },
-  {
-    id: createId(),
-    title: "Zatrudnię programistę",
-    desc: "Szukamy programisty JavaScript do pracy zdalnej. Wymagana dobra znajomość React i Node.js.",
-    price: "do uzgodnienia",
-    photo: "https://psr.gda.pl/wp-content/uploads/2020/06/programmer-scaled.jpg"
-  },
-  {
-    id: createId(),
-    title: "Kupię telefon",
-    desc: "Kupię używany telefon, najlepiej iPhone 12 lub nowszy, stan dobry, cena do uzgodnienia.",
-    price: "do uzgodnienia",
-    photo: "https://th.bing.com/th/id/OIP.3Vi0XbNqFIY9f-FiYP8kzgHaHa?rs=1&pid=ImgDetMain"
-  },
-  {
-    id: createId(),
-    title: "Sprzedam książki",
-    desc: "Sprzedam książki do nauki języka angielskiego. Stan bardzo dobry, ceny przystępne.",
-    price: "10-30 zł",
-    photo: "https://sklep.magnapolonia.org/wp-content/uploads/2022/11/dcb52ce41128c7-atlas-grzybow-400x576.jpeg"
-  },
-  {
-    id: createId(),
-    title: "Oddam za darmo",
-    desc: "Oddam za darmo stare meble: stół, krzesła i szafa. Do odbioru w Warszawie.",
-    price: "0 zł",
-    photo: "https://th.bing.com/th/id/OIP.WOZw0hxfNUPe6n4b2BsNBwHaFj?rs=1&pid=ImgDetMain"
-  },
-  {
-    id: createId(),
-    title: "Naprawa komputerów",
-    desc: "Naprawiam komputery stacjonarne i laptopy. Szybka naprawa, przystępne ceny.",
-    price: "od 50 zł",
-    photo: "https://d-gr.cdngr.pl/kadry/k/r/gr-ogl/30/1b/28404397_769952175_komputer-stacjonarny-z-monitorem-i-wifi-do-szkoly_xlarge.jpg"
-  },
-  {
-    id: createId(),
-    title: "Sprzedam grilla",
-    desc: "Sprzedam grill węglowy, prawie nieużywany. Idealny na letnie spotkania. Cena 150 zł.",
-    price: "150 zł",
-    photo: "https://th.bing.com/th/id/OIP.vYUpm5Me_4c8EQBjamjCogHaFj?rs=1&pid=ImgDetMain"
-  }
-];
-
-export function addAnnouncment(title, desc, price, photo) {
-  ogloszenia.push({
-    id: createId(),
-    title: title,
-    desc: desc,
-    price: price,
-    photo: photo,
-  });
-}
-
-function Announcement() {
-  const [observedAnnouncements, setObservedAnnouncements] = useState({});
+import "./ButtonAnimation.css";
 
 
-  useEffect(() => {
-    const savedObserved = JSON.parse(localStorage.getItem("observedAnnouncements"));
-    if (savedObserved) {
-      setObservedAnnouncements(savedObserved);
-    }
-  }, []);
+export function Announcement() {
+    const {user, loading} = useUser();
+    const navigate = useNavigate();
+    const [ogloszenia, setOgloszenia] = useState([]);
+    const [observedAnnouncements, setObservedAnnouncements] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
-  const handleObserve = (id) => {
-    const updatedObservations = {
-      ...observedAnnouncements,
-      [id]: !observedAnnouncements[id],
+    useEffect(() => {
+        fetch(`http://localhost:3000/ogloszenia`)
+            .then(response => response.json())
+            .then(data => {
+                setOgloszenia(data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setIsLoading(false);
+            });
+    }, []);
+
+    // Get followed announcements from Firebase
+    useEffect(() => {
+        const fetchObservedAnnouncements = async () => {
+            if (user) {
+                try {
+                    const followedIds = await getFollowedAnnouncements();
+                    const observedMap = followedIds.reduce((acc, id) => {
+                        acc[id] = true;
+                        return acc;
+                    }, {});
+
+                    setObservedAnnouncements(observedMap);
+                } catch (error) {
+                    console.error("Błąd podczas pobierania obserwowanych ogłoszeń:", error);
+                }
+            }
+        };
+
+        if (!loading) {
+            fetchObservedAnnouncements();
+        }
+    }, [user, loading]);
+
+    const handleObserve = async (id) => {
+        if (!user) {
+            navigate({
+                to: "/login",
+                search: {
+                    redirectReason: "followAnnouncement"
+                }
+            });
+            return;
+        }
+
+        try {
+            await followAnnouncement(id);
+            setObservedAnnouncements(prev => ({
+                ...prev,
+                [id]: !prev[id]
+            }));
+        } catch (error) {
+            console.error("Błąd podczas obserwowania ogłoszenia:", error);
+        }
     };
 
+    if (isLoading) {
+        return (
+            <div style={{display: "flex", justifyContent: "center", margin: "50px"}}>
+                <ClipLoader color={"purple"} size={50}/>
+            </div>
+        );
+    }
 
-    localStorage.setItem("observedAnnouncements", JSON.stringify(updatedObservations));
-    setObservedAnnouncements(updatedObservations);
-  };
+    return (
+        <div style={containerStyle}>
+            <h1 style={titleStyle}>Ogłoszenia</h1>
+            <div style={flexContainer}>
+                {ogloszenia.map((ogloszenie) => {
+                    const isObserved = observedAnnouncements[ogloszenie.id];
 
-  return (
-      <div style={containerStyle}>
-        <h2 style={titleStyle}>Ogłoszenia</h2>
-        <div style={flexContainer}>
-          {ogloszenia.map((ogloszenie) => {
-            const isObserved = observedAnnouncements[ogloszenie.id];
-
-            return (
-                <div key={ogloszenie.id} className="card" style={cardStyle}>
-                  <img src={ogloszenie.photo} className="card-img-top" alt={ogloszenie.title} />
-                  <div className="card-body">
-                    <h5 className="card-title">{ogloszenie.title}</h5>
-                    <p className="card-text">{ogloszenie.desc}</p>
-                    <a href="#" className="btn btn-primary">
-                      Zobacz więcej
-                    </a>
-                  </div>
-                  <button
-                      onClick={() => handleObserve(ogloszenie.id)}
-                      style={{
-                        backgroundColor: isObserved ? "gray" : "whitesmoke",
-                        color: "black",
-                        border: "none",
-                        padding: "10px 20px",
-                        cursor: "pointer",
-                        borderRadius: "5px",
-                      }}
-                  >
-                    {isObserved ? "Obserwujesz" : "Obserwuj"}
-                  </button>
-                  <div className="card-footer">{ogloszenie.price}</div>
-                </div>
-            );
-          })}
+                    return (
+                        <div key={ogloszenie.id} className="card" style={cardStyle}>
+                            <img src={ogloszenie.photos[0]} className="card-img-top" alt={ogloszenie.title}/>
+                            <div className="card-body">
+                                <h5 className="card-title">{ogloszenie.title}</h5>
+                                <p className="card-text">{ogloszenie.desc}</p>
+                                <Link to={`/posts/${ogloszenie.id}`} className="btn btn-primary">
+                                    Zobacz więcej
+                                </Link>
+                            </div>
+                            <button
+                                onClick={() => handleObserve(ogloszenie.id)}
+                                className="observe-button"
+                                style={{
+                                    backgroundColor: isObserved ? "lightgray" : "whitesmoke",
+                                    color: "black",
+                                    border: "none",
+                                    padding: "10px 20px",
+                                    cursor: "pointer",
+                                    borderRadius: "5px",
+                                }}
+                            >
+                                {isObserved ? "Obserwujesz" : "Obserwuj"}
+                            </button>
+                            <div
+                                className="card-footer">{ogloszenie.free ? "Za Darmo" : ogloszenie.price}{ogloszenie.to_negotiation ? " | Do Negocjacji" : ""}</div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
-      </div>
-  );
+    );
 }
 
 const containerStyle = {
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
 };
 
 const titleStyle = {
-  textAlign: "center",
-  marginBottom: "20px",
-  color: "black",
-  fontSize: "24px",
-  padding: "20px",
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "black",
+    fontSize: "32px",
+    padding: "20px",
+    fontWeight: "bold",
 };
 
 const flexContainer = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "20px",
-  justifyContent: "center",
-  width: "1500px",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+    width: "1500px",
 };
 
 const cardStyle = {
-  width: "300px",
-  padding: "15px 0px",
-  color: "black",
-  borderRadius: "8px",
-  backgroundColor: "#fff",
-  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-  textAlign: "center",
+    width: "300px",
+    padding: "0px 0px",
+    color: "black",
+    borderRadius: "8px",
+    backgroundColor: "#fff",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+    transition: "transform 0.3s, box-shadow 0.3s",
+    ":hover": {
+        transform: "translateY(-5px)",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)"
+    }
 };
 
 export default Announcement;

@@ -1,0 +1,165 @@
+{
+  "ogloszenia": [
+    {
+      "id": "7198",
+      "title": "Pre-Added Post",
+      "desc": "Sample description",
+      "price": "123 zl",
+      "photos": [
+        "https://d-gr.cdngr.pl/kadry/k/r/gr-ogl/30/1b/28404397_769952175_komputer-stacjonarny-z-monitorem-i-wifi-do-szkoly_xlarge.jpg"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "1034",
+      "title": "Sprzedam rower",
+      "desc": "Sprzedam używany rower górski, stan dobry, mało używany.",
+      "price": "400 zł",
+      "photos": [
+        "https://www.tabou.pl/wp-content/uploads/2023/05/Rower-elektryczny-TABOU-KINETIC-UP-1.0-W-2023_43246.jpg"
+      ],
+      "category": "",
+      "to_negotiation": true,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "6641",
+      "title": "Wynajmę mieszkanie",
+      "desc": "Wynajmę kawalerkę w centrum miasta. Mieszkanie umeblowane, idealne dla singla lub pary.",
+      "price": "1000 zł/miesiąc",
+      "photos": [
+        "https://i.st-nieruchomosci-online.pl/gdtf4px/mieszkanie-poznan-wynajem.jpg"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "8420",
+      "title": "Zatrudnię programistę",
+      "desc": "Szukamy programisty JavaScript do pracy zdalnej. Wymagana dobra znajomość React i Node.js.",
+      "price": "3000zl/miesiąc",
+      "photos": [
+        "https://psr.gda.pl/wp-content/uploads/2020/06/programmer-scaled.jpg"
+      ],
+      "category": "",
+      "to_negotiation": true,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "6384",
+      "title": "Sprzedam książki",
+      "desc": "Sprzedam książki do nauki języka angielskiego. Stan bardzo dobry, ceny przystępne.",
+      "price": "10-30 zł",
+      "photos": [
+        "https://sklep.magnapolonia.org/wp-content/uploads/2022/11/dcb52ce41128c7-atlas-grzybow-400x576.jpeg"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "2856",
+      "title": "Oddam za darmo",
+      "desc": "Oddam za darmo stare meble: stół, krzesła i szafa. Do odbioru w Warszawie.",
+      "price": "",
+      "photos": [
+        "https://th.bing.com/th/id/OIP.WOZw0hxfNUPe6n4b2BsNBwHaFj?rs=1\\u0026pid=ImgDetMain"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": true,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "9391",
+      "title": "Naprawa komputerów",
+      "desc": "Naprawiam komputery stacjonarne i laptopy. Szybka naprawa, przystępne ceny.",
+      "price": "od 50 zł",
+      "photos": [
+        "https://d-gr.cdngr.pl/kadry/k/r/gr-ogl/30/1b/28404397_769952175_komputer-stacjonarny-z-monitorem-i-wifi-do-szkoly_xlarge.jpg"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "4772",
+      "title": "Sprzedam grilla",
+      "desc": "Sprzedam grill węglowy, prawie nieużywany. Idealny na letnie spotkania.",
+      "price": "150 zł",
+      "photos": [
+        "https://hydrosan.eu/images/hydrosan/87000-88000/GRILL-OGRODOWY-WEGLOWY-Z-POKRYWA-OKRAGLY-VL10-CZARNY_%5B87035%5D_480.jpg"
+      ],
+      "category": "",
+      "to_negotiation": false,
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "fccpw2fs1z6cmiz9kdd4v8df",
+      "title": "d",
+      "desc": "d",
+      "price": 0,
+      "photos": [
+        "http://localhost:4000/uploads/photos-1743696069039-622726839.PNG",
+        "http://localhost:4000/uploads/photos-1743696069042-618185745.png"
+      ],
+      "to_negotiation": false,
+      "free": true,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "nzl67um6cnflge2n8luzqd6x",
+      "title": "dfsg",
+      "desc": "sdfg",
+      "price": "244",
+      "photos": [
+        "http://localhost:4000/uploads/photos-1747096845944-992653020.png",
+        "http://localhost:4000/uploads/photos-1747096845946-656184930.png",
+        "http://localhost:4000/uploads/photos-1747096845946-811557720.png"
+      ],
+      "to_negotiation": true,
+      "free": false,
+      "author": {
+        "uid": "MQGxnMyeLzO9Vm1jdMiu60TAZnX2",
+        "email": "wjetek@gmail.com"
+      }
+    }
+  ]
+}

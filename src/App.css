@@ -54,7 +54,13 @@
   width: 300px !important;
 }
 
+.ogloszenie-checkbox {
+  width: 20px !important;
+  height: 20px !important;
+}
+
 .card-img-top{
   height: 225px !important;
   width: 298px !important;
+  object-fit: cover !important;
 }

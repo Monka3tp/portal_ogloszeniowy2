@@ -1,0 +1,11 @@
+.observe-button {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.observe-button:hover {
+  transform: scale(1.05);
+}
+
+.observe-button:active {
+  transform: scale(0.95);
+}
