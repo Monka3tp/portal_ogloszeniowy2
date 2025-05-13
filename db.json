@@ -10,7 +10,11 @@
       ],
       "category": "",
       "to_negotiation": false,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "1034",
@@ -22,7 +26,11 @@
       ],
       "category": "",
       "to_negotiation": true,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "6641",
@@ -34,7 +42,11 @@
       ],
       "category": "",
       "to_negotiation": false,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "8420",
@@ -46,7 +58,11 @@
       ],
       "category": "",
       "to_negotiation": true,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "6384",
@@ -58,7 +74,11 @@
       ],
       "category": "",
       "to_negotiation": false,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "2856",
@@ -70,7 +90,11 @@
       ],
       "category": "",
       "to_negotiation": false,
-      "free": true
+      "free": true,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "9391",
@@ -82,7 +106,11 @@
       ],
       "category": "",
       "to_negotiation": false,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "4772",
@@ -90,11 +118,15 @@
       "desc": "Sprzedam grill węglowy, prawie nieużywany. Idealny na letnie spotkania.",
       "price": "150 zł",
       "photos": [
-        "https://th.bing.com/th/id/OIP.vYUpm5Me_4c8EQBjamjCogHaFj?rs=1\\u0026pid=ImgDetMain"
+        "https://hydrosan.eu/images/hydrosan/87000-88000/GRILL-OGRODOWY-WEGLOWY-Z-POKRYWA-OKRAGLY-VL10-CZARNY_%5B87035%5D_480.jpg"
       ],
       "category": "",
       "to_negotiation": false,
-      "free": false
+      "free": false,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
     },
     {
       "id": "fccpw2fs1z6cmiz9kdd4v8df",
@@ -106,7 +138,28 @@
         "http://localhost:4000/uploads/photos-1743696069042-618185745.png"
       ],
       "to_negotiation": false,
-      "free": true
+      "free": true,
+      "author": {
+        "uid": "0",
+        "email": "example@mail.com"
+      }
+    },
+    {
+      "id": "nzl67um6cnflge2n8luzqd6x",
+      "title": "dfsg",
+      "desc": "sdfg",
+      "price": "244",
+      "photos": [
+        "http://localhost:4000/uploads/photos-1747096845944-992653020.png",
+        "http://localhost:4000/uploads/photos-1747096845946-656184930.png",
+        "http://localhost:4000/uploads/photos-1747096845946-811557720.png"
+      ],
+      "to_negotiation": true,
+      "free": false,
+      "author": {
+        "uid": "MQGxnMyeLzO9Vm1jdMiu60TAZnX2",
+        "email": "wjetek@gmail.com"
+      }
     }
   ]
 }
